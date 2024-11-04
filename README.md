@@ -109,4 +109,23 @@ This vector field provides a powerful visualization of how the Neural ODE’s dy
 
 ![VectorField](plots/Vector_Field.png)
 
+# Strategy Analysis to Avoid Bankruptcy
+
+One of the core objectives of this framework is to analyze whether certain financial strategies could help at-risk companies avoid bankruptcy. By adjusting specific financial metrics, we can assess if and how these changes might influence the model’s bankruptcy predictions.
+
+### Case Study: Testing a Strategy for an At-Risk Company
+
+To illustrate, we took a company from the test dataset that had been labeled as bankrupt and tested a hypothetical strategy to improve its financial stability. We adjusted three key financial ratios by a factor of 0.3:
+- **Operating Expense Rate**
+- **Interest Expense Ratio**
+- **Operating Profit Growth Rate**
+
+Following these adjustments, the model's prediction shifted, indicating that the company would no longer be predicted to go bankrupt under the hypothetical changes.
+
+![Strategies](plots/comparison_animation_with_distinct_heatmaps.gif)
+
+> **Disclaimer**: This example is purely illustrative and does not serve as financial advice. We do not imply that this or any other strategy is feasible or effective. The framework provides insights for analysis rather than professional financial recommendations.
+
+This application highlights the model's potential as a decision-support tool, allowing users to explore hypothetical strategies and their impact on bankruptcy risk. While the model does not predict real-world outcomes, it offers a data-driven approach to examining how changes in financial metrics could influence business stability.
+
 
