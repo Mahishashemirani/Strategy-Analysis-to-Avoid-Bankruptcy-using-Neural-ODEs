@@ -33,3 +33,48 @@ The dataset contains a much smaller number of bankrupt companies compared to non
 1. **Normalization**: All features were normalized to standardize values across companies and improve model training stability.
 2. **Augmentation Process**: We calculated the **mean and variance** of each feature within the bankrupt category. Using these statistics, we generated synthetic data by sampling from a **Gaussian distribution** that reflects the feature distributions of bankrupt companies. This approach effectively enhances the representation of bankrupt companies in the dataset, improving model robustness for bankruptcy prediction.
 
+# Model
+
+## Encoding Bankruptcy State with One-Hot Categorical Distribution
+
+To represent bankruptcy state, we use a **One-Hot Categorical Distribution** from Pyro’s [distribution library](https://docs.pyro.ai/en/stable/distributions.html#onehotcategorical). This approach represents the bankruptcy state as:
+- `[1, 0]` for companies that are not bankrupt
+- `[0, 1]` for companies that are bankrupt
+
+This categorical representation allows us to easily map the binary outcome into a probabilistic framework for classification.
+
+## Latent Variable Representation with Neural Network Encoder
+
+A neural network encoder is used to reduce the high-dimensional feature space into a low-dimensional latent variable `z`. The encoder maps each company’s financial features to a 2D latent variable space, `z`, which serves as input to the Neural ODE model.
+
+In mathematical terms, the model is structured as:
+- $y$ ~ OneHotCategorical($p$): Defines the categorical output for bankruptcy prediction, where $p$ is the predicted probability vector.
+- $z$ ~ $N(\mu(x), \sigma(x))$: A 2D latent variable sampled from a Normal distribution, where $\mu(x)$ and $\sigma(x)$ are outputs of the encoder network, parameterized by the input features `x`.
+
+This reduction to a 2D space balances interpretability and efficiency while still capturing essential features for bankruptcy prediction.
+
+## Defining the Neural ODE for Bankruptcy Probability Prediction
+
+Given that we have two classes, $p$ is a 2D vector, representing the probability of bankruptcy. We define an **autonomous Neural ODE** as follows:
+- Assume $u$ is a 2D dynamical variable governed by the neural ODE $h(u)$.
+- Then, $\frac{du(t)}{dt} = h(u)$, with initial condition $u(0) = z$ and output $u(1) = p$.
+
+This formulation allows the Neural ODE to take the latent variable `z` as input and predict the probability of bankruptcy $p$ over time. Thus, the Neural ODE functions as a predictive model that evolves $z$ to output $p$, which directly represents bankruptcy likelihood.
+
+## Implementation
+
+We used **Pyro** for implementing the probabilistic encoding and prediction framework ([Pyro Documentation](https://pyro.ai)) and **torchdiffeq** for Neural ODE implementation ([torchdiffeq Repository](https://github.com/rtqichen/torchdiffeq)).
+
+### ELBO Loss and Stochastic Variational Inference
+
+The model’s loss function is based on the **Evidence Lower Bound (ELBO)**, optimized using **Stochastic Variational Inference (SVI)**. This approach helps estimate the posterior distribution of the latent variables and minimizes reconstruction errors by maximizing the ELBO.
+
+### Training Details
+
+- **Optimizer**: Adam
+- **Learning Rate**: `1e-3`
+- **Epochs**: 100
+
+
+
+
