@@ -24,7 +24,7 @@ In addition to these, a **bankruptcy state** column labels each company as eithe
 
 ## Feature Selection
 
-To improve model efficiency and focus on the most impactful variables, we performed **feature selection** using **Lasso Logistic Regression**. This method penalizes less important features, effectively filtering out those with insignificant predictive power. As a result, we reduced the feature set from **95** to **69 key features**.
+To improve model efficiency and focus on the most impactful variables, we performed **feature selection** using **[Lasso Logistic Regression](https://en.wikipedia.org/wiki/Lasso_(statistics))**. This method penalizes less important features, effectively filtering out those with insignificant predictive power. As a result, we reduced the feature set from **95** to **69 key features**.
 
 ## Data Augmentation for Imbalanced Classes
 
