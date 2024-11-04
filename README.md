@@ -75,6 +75,9 @@ The model’s loss function is based on the **Evidence Lower Bound (ELBO)**, opt
 - **Learning Rate**: `1e-3`
 - **Epochs**: 100
 
+The following plots illustrates the maximization of the ELBO over the course of training, as well as accuracy of the model in predicting bankruptcy:
+[!ELBO](plots/ELBO.png)
+[!Accuracy](plots/Accuracy.png)
 
 
 
