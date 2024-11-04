@@ -18,7 +18,7 @@ The dataset consists of **95 financial features** for each company, covering var
 - **After-tax Net Interest Rate**
 - **Cash Flow Rate**
 - **Debt Ratio**
-- **Working Capital Turnover Rate**
+- **Working Capital to Total Assets**
 
 In addition to these, a **bankruptcy state** column labels each company as either "bankrupt" or "not bankrupt."
 
