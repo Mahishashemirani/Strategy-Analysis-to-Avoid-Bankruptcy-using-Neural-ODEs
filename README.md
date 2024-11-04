@@ -45,11 +45,11 @@ This categorical representation allows us to easily map the binary outcome into 
 
 ## Latent Variable Representation with Neural Network Encoder
 
-A neural network encoder is used to reduce the high-dimensional feature space into a low-dimensional latent variable `z`. The encoder maps each company’s financial features to a 2D latent variable space, `z`, which serves as input to the Neural ODE model.
+A neural network encoder is used to reduce the high-dimensional feature space into a low-dimensional latent variable $z$. The encoder maps each company’s financial features to a 2D latent variable space, $z$, which serves as input to the Neural ODE model.
 
 In mathematical terms, the model is structured as:
 - $y$ ~ OneHotCategorical($p$): Defines the categorical output for bankruptcy prediction, where $p$ is the predicted probability vector.
-- $z$ ~ $N(\mu(x), \sigma(x))$: A 2D latent variable sampled from a Normal distribution, where $\mu(x)$ and $\sigma(x)$ are outputs of the encoder network, parameterized by the input features `x`.
+- $z$ ~ $N(\mu(x), \sigma(x))$: A 2D latent variable sampled from a Normal distribution, where $\mu(x)$ and $\sigma(x)$ are outputs of the encoder network, parameterized by the input features $x$.
 
 This reduction to a 2D space balances interpretability and efficiency while still capturing essential features for bankruptcy prediction.
 
@@ -59,7 +59,7 @@ Given that we have two classes, $p$ is a 2D vector, representing the probability
 - Assume $u$ is a 2D dynamical variable governed by the neural ODE $h(u)$.
 - Then, $\frac{du(t)}{dt} = h(u)$, with initial condition $u(0) = z$ and output $u(1) = p$.
 
-This formulation allows the Neural ODE to take the latent variable `z` as input and predict the probability of bankruptcy $p$ over time. Thus, the Neural ODE functions as a predictive model that evolves $z$ to output $p$, which directly represents bankruptcy likelihood.
+This formulation allows the Neural ODE to take the latent variable $z$ as input and predict the probability of bankruptcy $p$ over time. Thus, the Neural ODE functions as a predictive model that evolves $z$ to output $p$, which directly represents bankruptcy likelihood.
 
 ## Implementation
 
